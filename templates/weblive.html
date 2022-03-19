@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<title>camera live</title>
+
+<head>
+    <link href="../static/css/video-js.min.css" rel="stylesheet" />
+    <script src="../static/js/jquery.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="../static/css/bili.css" />
+    <script src="../static/js/ZLMRTCClient.js"></script>
+</head>
+
+<body>
+    <div>
+        <div class="mainContainer">
+            <div class="url-input">
+                <label>摄像头状态:</label>
+                <h1 id="status">可信</h1>
+            </div>
+
+
+            <video id='video' width=960 height=720 class="video-js vjs-default-skin" controls autoplay>
+                Your browser is too old which doesn't support HTML5 video.
+            </video>
+
+            <div>
+                <div class="controls" style="left: auto;">
+                    <button id="startVideoBt">播放视频</button>
+                    <button id="stopVideoBt">停止播放</button>
+                </div>
+                <div class="controls">
+                    <button id="startAuthBt">开始认证</button>
+                    <button id="endAuthBt">停止认证</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../static/js/myfun.js" type="text/javascript"></script>
+
+</html>
