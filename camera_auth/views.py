@@ -18,10 +18,10 @@ def template(request):
 @csrf_exempt
 def getauthresult(request):
     print('reach')
-    if request.method == 'POST':
+    if request.method == 'GET':
         req = json.loads(request.body)
         try:
-            ret = run('10.4.122.2','8081')
+            ret = run('127.0.0.1','8081')
             print(ret)
         except:
                 returnJsonResponse({'result': 200, 'msg': 'unknow'})
