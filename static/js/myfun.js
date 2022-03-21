@@ -23,7 +23,7 @@ function start_play() {
         {
             element: document.getElementById('video'),// video 标签
             debug: true,// 是否打印日志
-            zlmsdpUrl: 'http://10.4.122.2/index/api/webrtc?app=live&stream=video&type=play',//流地址
+            zlmsdpUrl: 'http://127.0.0.1:8001/index/api/webrtc?app=live&stream=video&type=play',//流地址
             simulcast: false,
             useCamera: false,
             audioEnable: false,
@@ -104,7 +104,7 @@ function timelyAuth() {
 
     xhrRegister.open('POST', '../getstatus/');
     xhrRegister.setRequestHeader('Content-type', 'application/x-www-form-urlencoded;charset=utf-8');
-    xhrRegister.send(JSON.stringify("getsta"));
+    xhrRegister.send(JSON.stringify(""));
 };
 
 
@@ -112,7 +112,7 @@ function timelyAuth() {
 let subStartBt = document.getElementById('startAuthBt');
 subStartBt.onclick = function () {
     console.log("start checking");
-    interval = setInterval(timelyAuth, 30);
+    interval = setInterval(timelyAuth, 30000);
 };
 
 
