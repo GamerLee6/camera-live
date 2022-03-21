@@ -24,7 +24,7 @@ def getauthresult(request):
             ret = run('127.0.0.1','8081')
             print(ret)
         except:
-                returnJsonResponse({'result': 200, 'msg': 'unknow'})
+            return JsonResponse({'result': 200, 'msg': 'unknow'})
         if ret == 1:
             return JsonResponse({'result': 200, 'msg': 'safe'})
         else:

@@ -104,7 +104,7 @@ function timelyAuth() {
 
     xhrRegister.open('GET', '../getstatus/');
     xhrRegister.setRequestHeader('Content-type', 'application/x-www-form-urlencoded;charset=utf-8');
-    xhrRegister.send(JSON.stringify("a"));
+    xhrRegister.send(JSON.stringify({'a': 1}));
 };
 
 
