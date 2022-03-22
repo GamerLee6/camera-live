@@ -19,11 +19,14 @@ function ajaxResponse(xhr, successFunction, falseFunction) {
 
 
 function start_play() {
+    // let url = document.getElementById('vidoeUrl').value;
+    // console.log(url);
+
     player = new ZLMRTCClient.Endpoint(
         {
             element: document.getElementById('video'),// video 标签
             debug: true,// 是否打印日志
-            zlmsdpUrl: 'http://127.0.0.1:8001/index/api/webrtc?app=live&stream=video&type=play',//流地址
+            zlmsdpUrl: 'http://139.196.156.60:8080/index/api/webrtc?app=live&stream=video&type=play',//流地址
             simulcast: false,
             useCamera: false,
             audioEnable: false,
