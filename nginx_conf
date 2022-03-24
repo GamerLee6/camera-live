@@ -1,0 +1,9 @@
+#add into server 	
+	location / {
+	    include uwsgi_params;
+	    uwsgi_pass 127.0.0.1:9001;
+	}
+
+	location /static {
+	    alias $(static_file_path);
+	}

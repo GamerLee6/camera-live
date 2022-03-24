@@ -25,7 +25,7 @@ function start_play() {
     player = new ZLMRTCClient.Endpoint(
         {
             element: document.getElementById('video'),// video 标签
-            debug: true,// 是否打印日志
+            debug: false,// 是否打印日志
             zlmsdpUrl: 'http://139.196.156.60:8080/index/api/webrtc?app=live&stream=video&type=play',//流地址
             simulcast: false,
             useCamera: false,
@@ -114,20 +114,14 @@ function timelyAuth() {
     xhrRegister.send(JSON.stringify(a));
 };
 
-
-
 let subStartBt = document.getElementById('startAuthBt');
 subStartBt.onclick = function () {
     console.log("start checking");
     interval = setInterval(timelyAuth, 30000);
 };
 
-
 let endAuthBt = document.getElementById('endAuthBt');
 endAuthBt.onclick = function () {
     console.log("stop checking");
     clearInterval(interval);
 };
-
-
-
