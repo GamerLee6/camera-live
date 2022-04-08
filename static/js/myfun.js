@@ -89,7 +89,7 @@ function timelyAuth() {
     ajaxResponse(xhrRegister,
         function () {
             let response = JSON.parse(xhrRegister.responseText);
-            console.log(response.msg);
+            // console.log(response.msg);
             if (response.msg === 'safe') {
                 console.log('safe');
                 staForm.innerHTML = '可信';
@@ -101,27 +101,52 @@ function timelyAuth() {
             }
 
         }, function () {
-            // let respones = JSON.parse(xhrRegister.responseText);
-
+            console.log('unkonw');
+            staForm.innerHTML = '不可信';
+            staForm.style.color = 'red';
         });
 
-    let a = {
-        a: 1
-    }
+        let para = {
+            status: 'start'
+        }
     
     xhrRegister.open('POST', '../getstatus/');
     xhrRegister.setRequestHeader('Content-type', 'application/x-www-form-urlencoded;charset=utf-8');
-    xhrRegister.send(JSON.stringify(a));
+    xhrRegister.send(JSON.stringify(para));
 };
 
 let subStartBt = document.getElementById('startAuthBt');
 subStartBt.onclick = function () {
     console.log("start checking");
-    interval = setInterval(timelyAuth, 30000);
+    timelyAuth();
+    interval = setInterval(timelyAuth, 15000);
 };
 
 let endAuthBt = document.getElementById('endAuthBt');
 endAuthBt.onclick = function () {
     console.log("stop checking");
     clearInterval(interval);
+
+    let xhrRegister = new XMLHttpRequest();
+    ajaxResponse(xhrRegister,
+        function () {
+            let response = JSON.parse(xhrRegister.responseText);
+            console.log(response.msg);
+            if (response.msg === 'OK') {
+                console.log('checking is closed');
+            } else {
+                console.log('checking can not be closed');
+            }
+        }, function () {
+            // let respones = JSON.parse(xhrRegister.responseText);
+
+        });
+
+    let para = {
+        status: 'stop'
+    }
+    
+    xhrRegister.open('POST', '../getstatus/');
+    xhrRegister.setRequestHeader('Content-type', 'application/x-www-form-urlencoded;charset=utf-8');
+    xhrRegister.send(JSON.stringify(para));
 };
