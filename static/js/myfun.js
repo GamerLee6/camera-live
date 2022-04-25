@@ -261,13 +261,13 @@ attackDiv.onclick = function () {
         status: attack_Status,
     }
 
-    // console.log(attack_Status);
+    console.log(attack_Status);
     if (attack_Status == 0) {
         para['status'] = 'start';
     } else {
         para['status'] = 'end';
     }
-    // console.log(para);
+    console.log(para);
 
     let xhrRegister = new XMLHttpRequest();
     ajaxResponse(xhrRegister,
