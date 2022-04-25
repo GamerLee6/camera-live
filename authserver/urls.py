@@ -26,6 +26,7 @@ urlpatterns = [
     path('', front),
     path('bili/', template),
     path('getstatus/', getauthresult),
+    path('attack/', attackHandler),
     path('admin/', admin.site.urls),
     re_path(r'^static/(?P<path>.*)$', static.serve,
       {'document_root': settings.STATIC_ROOT}, name='static'),

@@ -1,3 +1,4 @@
+from sys import stderr, stdin, stdout
 from django.shortcuts import render
 
 # Create your views here.
@@ -9,6 +10,8 @@ from django.views.decorators.csrf import csrf_exempt
 import socket, ssl
 import time
 import threading
+
+import paramiko
 
 
 def hello(request):
@@ -26,6 +29,7 @@ is_checking = False
 camera_status = 0
 keep_running = 1
 check_thread = None
+
  
 
 def routine_check():
@@ -122,4 +126,52 @@ def getauthresult(request):
             # print('para is stop')
             stop_check()
             return JsonResponse({'result': 200, 'msg': 'OK'})
-   
+
+under_attack = 0
+
+def atkStart():
+    print('start attack')
+    try:
+        ssh = paramiko.SSHClient()
+        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        ssh.connect(hostname='10.201.230.51', port=22, username='root', password='')
+        stdin, stdout, stderr = ssh.exec_command('/root/malware')
+        # print(stdout.read().decode())
+        ssh.close()
+        global under_attack
+        under_attack = 1
+    except Exception as e:
+        print(e)
+    print('attack fin')
+
+def atkEnd():
+    print('end attack')
+    try:
+        ssh = paramiko.SSHClient()
+        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        ssh.connect(hostname='10.201.230.51', port=22, username='root', password='')
+        stdin, stdout, stderr = ssh.exec_command('kill $(ps aux | grep malware | grep -v grep | awk "{print $1}")')
+        # print(stdout.read().decode())
+        ssh.close()
+        global under_attack
+        under_attack = 0
+    except Exception as e:
+        print(e)
+    print('end fin')
+        
+
+@csrf_exempt
+def attackHandler(request):
+    print('attack handle')
+    if request.method == 'POST':
+        req = json.loads(request.body)
+        if req['status'] == 'start':
+            if under_attack == 0:
+                atkStart()
+            return JsonResponse({'result': 200, 'msg': 'start attack succeed'})
+        else:
+            atkEnd()
+            return JsonResponse({'result': 200, 'msg': 'end attack succeed'})
+    if request.method == 'GET':
+        return JsonResponse({'result': 200, 'msg': under_attack})
+

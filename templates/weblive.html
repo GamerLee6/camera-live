@@ -3,12 +3,11 @@
 <title>camera live</title>
 
 <head>
-    <link href="../static/css/video-js.min.css" rel="stylesheet" />
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="../static/css/video-js.min.css" rel="stylesheet" type="text/css" />
     <script src="../static/js/jquery.min.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="../static/css/bili.css" />
     <script src="../static/js/ZLMRTCClient.js" type="text/javascript"></script>
-    <link href="../static/css/xterm.css" rel="stylesheet">
-    <script src="../static/js/xterm.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -19,21 +18,60 @@
                 <h1 id="status">可信</h1>
             </div>
 
-            <!-- <input id="vidoeUrl"> -->
-            <video id='video' width=960 height=720 class="video-js vjs-default-skin" controls autoplay>
-                Your browser is too old which doesn't support HTML5 video.
-            </video>
-            
-            <div id="terminal"></div>
+            <div class="container">
+                <div class="row justify-content-md-center">
+                    <div class="col col-md-7">
+                        <video id='video' width=640 height=480 class="video-js vjs-default-skin" controls autoplay>
+                            Your browser is too old which doesn't support HTML5 video.
+                        </video>
+                    </div>
+                    <div class="col col-md-5">
+                        <div class="row justify-content-sm-center">
+                            <div class="col-md">
+                                <div id="attackDiv" style="display: flex; justify-content: center; align-items: Center;">
+                                    <img id="atkpng-attacking" src="../static/img/attacking.png" style="transform:scale(0.3); display: none;">
+                                    <img id="atkpng-waiting" src="../static/img/waiting.png" style="transform:scale(0.3); display: block;">
+                                </div>
+                                <p>恶意进程</p>
+                            </div>
+                            <div class="col-sm" style="display: flex; justify-content: center; align-items: Center;">
+                                <div class="col-sm">
 
-            <div>
-                <div class="controls" style="left: auto;">
-                    <button id="startVideoBt">播放视频</button>
-                    <button id="stopVideoBt">停止播放</button>
-                </div>
-                <div class="controls">
-                    <button id="startAuthBt">开始认证</button>
-                    <button id="endAuthBt">停止认证</button>
+                                    <img src="../static/img/right_arrow.png"
+                                        style="transform:scale(0.3); display: block;">
+                                    <img src="../static/img/red_right_arrow.png"
+                                        style="transform:scale(0.35); display: none;">
+                                </div>
+                                <div class="col-sm">
+                                    <img src="../static/img/right_arrow.png"
+                                        style="transform:scale(0.3); display: block;">
+                                    <img src="../static/img/red_right_arrow.png"
+                                        style="transform:scale(0.3); display: none;">
+                                </div>
+
+                            </div>
+                            <div class="col-sm">
+                                <div style="display: flex; justify-content: center; align-items: Center;">
+                                    <img src="../static/img/SurveillanceCamera.png" style="transform:scale(0.3);">
+                                </div>
+                                <p>可信摄像头</p>
+                            </div>
+                        </div>
+                        <div class="row justify-content-md-center">
+                            <div class="controls">
+                                <button id="startVideoBt">播放视频</button>
+                                <button id="stopVideoBt">停止播放</button>
+                            </div>
+                            <div class="controls">
+                                <button id="startAuthBt">开始认证</button>
+                                <button id="endAuthBt">停止认证</button>
+                            </div>
+                            <div class="controls">
+                                <button id="startAtkBt">attack</button>
+                                <button id="endAtkBt">stop</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
