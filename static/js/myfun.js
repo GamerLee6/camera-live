@@ -153,73 +153,116 @@ endAuthBt.onclick = function () {
 };
 
 // start attack button
-let subAtkBt = document.getElementById('startAtkBt');
-subAtkBt.onclick = function () {
-    console.log("start attack");
 
-    let xhrRegister = new XMLHttpRequest();
-    ajaxResponse(xhrRegister,
-        function () {
-            let response = JSON.parse(xhrRegister.responseText);
-            // console.log(response.msg);
-            if (response.msg === 'attack succeed') {
-                console.log('attack succeed');
-            } else {
-                console.log('unsafe');
+// let subAtkBt = document.getElementById('startAtkBt');
+// subAtkBt.onclick = function () {
+//     console.log("start attack");
 
-            }
+//     let xhrRegister = new XMLHttpRequest();
+//     ajaxResponse(xhrRegister,
+//         function () {
+//             let response = JSON.parse(xhrRegister.responseText);
+//             // console.log(response.msg);
+//             if (response.msg === 'attack succeed') {
+//                 console.log('attack succeed');
+//             } else {
+//                 console.log('unsafe');
 
-        }, function () {
-            console.log('unknow');
+//             }
 
-        });
+//         }, function () {
+//             console.log('unknow');
 
-    let para = {
-        status: 'start'
-    }
+//         });
 
-    xhrRegister.open('POST', '../attack/');
-    xhrRegister.setRequestHeader('Content-type', 'application/x-www-form-urlencoded;charset=utf-8');
-    xhrRegister.send(JSON.stringify(para));
-};
+//     let para = {
+//         status: 'start'
+//     }
+
+//     xhrRegister.open('POST', '../attack/');
+//     xhrRegister.setRequestHeader('Content-type', 'application/x-www-form-urlencoded;charset=utf-8');
+//     xhrRegister.send(JSON.stringify(para));
+// };
 
 // end attack button
-let endAtkBt = document.getElementById('endAtkBt');
-endAtkBt.onclick = function () {
-    console.log("end attack");
 
-    let xhrRegister = new XMLHttpRequest();
-    ajaxResponse(xhrRegister,
-        function () {
-            let response = JSON.parse(xhrRegister.responseText);
-            // console.log(response.msg);
-            if (response.msg === 'end attack succeed') {
-                console.log('attack end succeed');
-            } else {
-                console.log('unsafe');
-            }
+// let endAtkBt = document.getElementById('endAtkBt');
+// endAtkBt.onclick = function () {
+//     console.log("end attack");
 
-        }, function () {
-            console.log('unknow');
+//     let xhrRegister = new XMLHttpRequest();
+//     ajaxResponse(xhrRegister,
+//         function () {
+//             let response = JSON.parse(xhrRegister.responseText);
+//             // console.log(response.msg);
+//             if (response.msg === 'end attack succeed') {
+//                 console.log('attack end succeed');
+//             } else {
+//                 console.log('unsafe');
+//             }
 
-        });
+//         }, function () {
+//             console.log('unknow');
 
-    let para = {
-        status: 'end'
-    }
+//         });
 
-    xhrRegister.open('POST', '../attack/');
-    xhrRegister.setRequestHeader('Content-type', 'application/x-www-form-urlencoded;charset=utf-8');
-    xhrRegister.send(JSON.stringify(para));
+//     let para = {
+//         status: 'end'
+//     }
 
-};
+//     xhrRegister.open('POST', '../attack/');
+//     xhrRegister.setRequestHeader('Content-type', 'application/x-www-form-urlencoded;charset=utf-8');
+//     xhrRegister.send(JSON.stringify(para));
+
+// };
 
 //load png dynamicly
 
 let atkPngAttacking = document.getElementById('atkpng-attacking');
 let atkPngWaiting = document.getElementById('atkpng-waiting');
 var attack_Status = 0;
+var light_switch = 0;
+var light_interval;
 let attackDiv = document.getElementById('attackDiv');
+
+
+
+let arr1b = document.getElementById('arrow1black');
+let arr1r = document.getElementById('arrow1red');
+let arr2b = document.getElementById('arrow2black');
+let arr2r = document.getElementById('arrow2red');
+
+function startLoopLight() {
+    light_interval = setInterval(loopLight, 1000);
+}
+
+function endLoopLight() {
+    loopLight();
+    clearInterval(light_interval);
+}
+
+function loopLight() {
+    if (attack_Status == 0) {
+        arr1b.style.display = 'block';
+        arr2b.style.display = 'block';
+        arr1r.style.display = 'none';
+        arr2r.style.display = 'none';
+    } else {
+        if (light_switch == 0) {
+            light_switch = 1;
+            arr1b.style.display = 'none';
+            arr2b.style.display = 'block';
+            arr1r.style.display = 'block';
+            arr2r.style.display = 'none';
+        } else {
+            light_switch = 0;
+            arr1b.style.display = 'block';
+            arr2b.style.display = 'none';
+            arr1r.style.display = 'none';
+            arr2r.style.display = 'block';
+        }
+    }
+}
 
 window.onload = function () {
     let xhrRegister = new XMLHttpRequest();
@@ -277,11 +320,13 @@ attackDiv.onclick = function () {
             if (response.msg === 'start attack succeed') {
                 console.log('attack start succeed');
                 attack_Status = 1;
+                startLoopLight();
                 atkPngAttacking.style.display = "block";
                 atkPngWaiting.style.display = "none";
             } else if (response.msg === 'end attack succeed') {
                 console.log('attack end succeed');
                 attack_Status = 0;
+                endLoopLight();
                 atkPngAttacking.style.display = "none";
                 atkPngWaiting.style.display = "block";
             } else {
