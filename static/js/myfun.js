@@ -135,6 +135,7 @@ endAuthBt.onclick = function () {
             console.log(response.msg);
             if (response.msg === 'OK') {
                 console.log('checking is closed');
+                staForm.innerHTML = '';
             } else {
                 console.log('checking can not be closed');
             }

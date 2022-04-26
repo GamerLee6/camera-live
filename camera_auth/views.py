@@ -21,7 +21,7 @@ def front(request):
     return render(request, 'weblive.html')  
 
 def template(request):
-    return render(request, 'bili.html')  
+    return render(request, 'index.html')  
 
 
 is_checking = False
