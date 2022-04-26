@@ -27,7 +27,7 @@ function start_play() {
         {
             element: document.getElementById('video'),// video 标签
             debug: false,// 是否打印日志
-            zlmsdpUrl: 'http://10.4.122.3:8080/index/api/webrtc?app=live&stream=video&type=play',//流地址
+            zlmsdpUrl: 'http://47.96.133.35:8080/index/api/webrtc?app=live&stream=video&type=play',//流地址
             simulcast: false,
             useCamera: false,
             audioEnable: false,
@@ -221,11 +221,14 @@ endAuthBt.onclick = function () {
 let atkPngAttacking = document.getElementById('atkpng-attacking');
 let atkPngWaiting = document.getElementById('atkpng-waiting');
 var attack_Status = 0;
-var light_switch = 0;
+var light_switch = 0; //0,1,2,3clear
 var light_interval;
 let attackDiv = document.getElementById('attackDiv');
 
 
+let evil1 = document.getElementById('evil1');
+let evil2 = document.getElementById('evil2');
+let evil3 = document.getElementById('evil3');
 
 let arr1b = document.getElementById('arrow1black');
 let arr1r = document.getElementById('arrow1red');
@@ -237,11 +240,14 @@ function startLoopLight() {
 }
 
 function endLoopLight() {
-    loopLight();
     clearInterval(light_interval);
+    light_switch = 0;
+    evil1.style.display = 'none';
+    evil2.style.display = 'none';
+    evil3.style.display = 'none'; 
 }
 
-function loopLight() {
+function loopLight_old() {
     if (attack_Status == 0) {
         arr1b.style.display = 'block';
         arr2b.style.display = 'block';
@@ -262,6 +268,32 @@ function loopLight() {
             arr2r.style.display = 'block';
         }
     }
+}
+
+function loopLight() {
+
+    if (light_switch == 0) {
+        light_switch = 1;
+        evil1.style.display = 'block';
+        evil2.style.display = 'none';
+        evil3.style.display = 'none';
+    } else if (light_switch == 1) {
+        light_switch = 2;
+        evil1.style.display = 'none';
+        evil2.style.display = 'block';
+        evil3.style.display = 'none';
+    } else if (light_switch == 2) {
+        light_switch = 3;
+        evil1.style.display = 'none';
+        evil2.style.display = 'none';
+        evil3.style.display = 'block';
+    } else {
+        light_switch = 0;
+        evil1.style.display = 'none';
+        evil2.style.display = 'none';
+        evil3.style.display = 'none'; 
+    }
+
 }
 
 window.onload = function () {

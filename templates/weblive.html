@@ -14,8 +14,8 @@
     <div>
         <div class="mainContainer">
             <div class="url-input">
-                <label>摄像头状态:</label>
-                <h1 id="status">可信</h1>
+                <label style="font-size: 1.2rem">摄像头状态:</label>
+                <h1 id="status" style="font-size: 2.5rem">可信</h1>
             </div>
 
             <div class="container">
@@ -26,37 +26,48 @@
                         </video>
                     </div>
                     <div class="col-lg-5">
-                        <div class="row justify-content-md-center" style="display: flex; justify-content: center; align-items: Center; margin-top: 10%;">
-                            <div class="col-md-4">
+                        <label>攻击示意区</label> 
+                        <div class="row justify-content-md-center" style="display: flex; justify-content: center; align-items: Center; margin-bottom: 30%;">
+                            <div class="col-md-3">
                                 <div id="attackDiv" style="display: flex; justify-content: center; align-items: Center; ">
                                     <img id="atkpng-attacking" src="../static/img/attacking.png" style="max-width: 100%; display: none;">
                                     <img id="atkpng-waiting" src="../static/img/waiting.png" style="max-width: 100%; display: block;">
                                 </div>
-                                <p style="display: flex; justify-content: center; align-items: Center;">恶意进程</p>
+                                <p style="display: flex; justify-content: center; align-items: Center;">攻击者</p>
                             </div>
-                            <div class="col-md-4" style="display: flex; justify-content: center; align-items: Center; ">
-                                <div class="col-md" style="display: flex; justify-content: center; align-items: Center;">
+                            <!-- <div class="col-md" style="display: flex; justify-content: center; align-items: Center; "> -->
+                                <!-- <div class="col-md" style="display: flex; justify-content: center; align-items: Center;">
                                     <img id="arrow1black" src="../static/img/right_arrow.png"
-                                        style="max-width: 100%; display: block;">
+                                        style="max-width: 150%; display: block;">
                                     <img id="arrow1red" src="../static/img/red_right_arrow.png"
-                                        style="max-width: 100%; display: none;">
+                                        style="max-width: 150%; display: none;">
                                 </div>
                                 <div class="col-md" style="display: flex; justify-content: center; align-items: Center;">
                                     <img id="arrow2black" src="../static/img/right_arrow.png"
-                                        style="max-width: 100%; display: block;">
+                                        style="max-width: 150%; display: block;">
                                     <img id="arrow2red" src="../static/img/red_right_arrow.png"
-                                        style="max-width: 100%; display: none;">
+                                        style="max-width: 150%; display: none;">
+                                </div> -->
+                                <div class="col-md-2" style="display: flex; justify-content: center; align-items: Center; ">
+                                    <img id="evil1" src="../static/img/emoticons-color_devil.png" style="max-width: 120%; display: none;">
+                                </div>
+                                <div class="col-md-2" style="display: flex; justify-content: center; align-items: Center; ">
+                                    <img id="evil2" src="../static/img/emoticons-color_devil.png" style="max-width: 120%; display: none;">
+                                </div>
+                                <div class="col-md-2" style="display: flex; justify-content: center; align-items: Center; ">
+                                    <img id="evil3" src="../static/img/emoticons-color_devil.png" style="max-width: 120%; display: none;">
                                 </div>
 
-                            </div>
-                            <div class="col-md-4">
+                            <!-- </div> -->
+                            <div class="col-md-3">
                                 <div style="display: flex; justify-content: center; align-items: Center; ">
                                     <img src="../static/img/SurveillanceCamera.png" style="max-width: 100%;">
                                 </div>
                                 <p style="display: flex; justify-content: center; align-items: Center;">可信摄像头</p>
                             </div>
                         </div>
-                        <div class="row justify-content-md-center" style="margin-top: 20%;">
+                        <label>控制区</label> 
+                        <div class="row justify-content-md-center" style="margin-top: 0%;">
                             <div class="controls col-md-5">
                                 <button id="startVideoBt">播放视频</button>
                                 <button id="stopVideoBt">停止播放</button>

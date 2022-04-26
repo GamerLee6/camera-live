@@ -27,14 +27,14 @@ def template(request):
 is_checking = False
 # sock = None
 camera_status = 0
-keep_running = 1
+keep_running = 0
 check_thread = None
 
  
 
 def routine_check():
     global camera_status
-    while True:
+    while keep_running:
         context = ssl.SSLContext(ssl.PROTOCOL_TLS)
         context.verify_mode = ssl.CERT_NONE
 
@@ -53,9 +53,9 @@ def routine_check():
         camera_status = int(ssl_sock.recv(1024).decode())
         # print(camera_status)
         sock.close()
-        global keep_running
-        if keep_running == 0:
-            break
+        # global keep_running
+        # if keep_running == 0:
+        #     break
         time.sleep(10)
 
 
@@ -134,7 +134,7 @@ def atkStart():
     try:
         ssh = paramiko.SSHClient()
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh.connect(hostname='10.201.230.51', port=22, username='root', password='')
+        ssh.connect(hostname='127.0.0.1', port=7300, username='root', password='')
         stdin, stdout, stderr = ssh.exec_command('/root/malware')
         # print(stdout.read().decode())
         ssh.close()
@@ -149,7 +149,7 @@ def atkEnd():
     try:
         ssh = paramiko.SSHClient()
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh.connect(hostname='10.201.230.51', port=22, username='root', password='')
+        ssh.connect(hostname='127.0.0.1', port=7300, username='root', password='')
         stdin, stdout, stderr = ssh.exec_command('kill $(ps aux | grep malware | grep -v grep | awk "{print $1}")')
         # print(stdout.read().decode())
         ssh.close()
