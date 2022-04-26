@@ -82,9 +82,8 @@ stopVideoBt.onclick = function stop() {
     }
 }
 
-
+let staForm = document.getElementById('status');
 function timelyAuth() {
-    let staForm = document.getElementById('status');
     let xhrRegister = new XMLHttpRequest();
 
     ajaxResponse(xhrRegister,
@@ -103,8 +102,8 @@ function timelyAuth() {
 
         }, function () {
             console.log('unknow');
-            staForm.innerHTML = '不可信';
-            staForm.style.color = 'red';
+            staForm.innerHTML = '';
+            staForm.style.color = '';
         });
 
     let para = {
