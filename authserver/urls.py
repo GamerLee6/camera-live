@@ -28,6 +28,7 @@ urlpatterns = [
     path('index/', template),
     path('getstatus/', getauthresult),
     path('attack/', attackHandler),
+    path('sshcommand/',FakeSSH),
     path('admin/', admin.site.urls),
     re_path(r'weblive[0-9]+-[0-9]+', front, name='video'),
     re_path(r'^static/(?P<path>.*)$', static.serve,

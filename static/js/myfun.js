@@ -244,7 +244,7 @@ function endLoopLight() {
     light_switch = 0;
     evil1.style.display = 'none';
     evil2.style.display = 'none';
-    evil3.style.display = 'none'; 
+    evil3.style.display = 'none';
 }
 
 function loopLight_old() {
@@ -291,7 +291,7 @@ function loopLight() {
         light_switch = 0;
         evil1.style.display = 'none';
         evil2.style.display = 'none';
-        evil3.style.display = 'none'; 
+        evil3.style.display = 'none';
     }
 
 }
@@ -372,9 +372,61 @@ attackDiv.onclick = function () {
     xhrRegister.open('POST', '../attack/');
     xhrRegister.setRequestHeader('Content-type', 'application/x-www-form-urlencoded;charset=utf-8');
     xhrRegister.send(JSON.stringify(para));
+}
 
+
+let commitBtn = document.getElementById('cmd_enter');
+let cmdInput = document.getElementById('cmd');
+let outputText = document.getElementById('output');
+
+cmdInput.onfocus = function () {
+    this.select();
 }
 
 
 
+cmdInput.onkeydown = function (eve) {
+    console.log("pressed enter");
+    var e = eve || window.event;
+    if (e.keyCode == 13) {
+        commitBtn.onclick();
+    }
+}
 
+
+
+commitBtn.onclick = function () {
+    cmt_str = cmdInput.value;
+    console.log(cmt_str);
+
+    let xhrRegister = new XMLHttpRequest();
+    ajaxResponse(xhrRegister,
+        function () {
+            let response = JSON.parse(xhrRegister.responseText);
+            let out = response.stdout;
+            let err = response.stderr
+            console.log(out);
+            console.log(err);
+            outputText.innerHTML = '';
+            if (response.result === 200) {
+                if (out.length != 0)
+                    outputText.innerHTML = outputText.innerHTML + out;
+                if (err.length != 0)
+                    outputText.innerHTML = outputText.innerHTML + '\n' + err;
+            } else {
+                outputText.innerText = "";
+            }
+        }, function () {
+            console.log('unknow');
+            outputText.innerText = "";
+        });
+
+
+    let para = {
+        command: cmt_str,
+    }
+
+    xhrRegister.open('POST', '../sshcommand/');
+    xhrRegister.setRequestHeader('Content-type', 'application/x-www-form-urlencoded;charset=utf-8');
+    xhrRegister.send(JSON.stringify(para));
+}

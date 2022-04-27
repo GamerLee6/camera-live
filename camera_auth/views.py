@@ -1,3 +1,4 @@
+from functools import cmp_to_key
 from sys import stderr, stdin, stdout
 from django.shortcuts import render
 
@@ -134,8 +135,8 @@ def atkStart():
     try:
         ssh = paramiko.SSHClient()
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh.connect(hostname='127.0.0.1', port=7300, username='root', password='')
-        stdin, stdout, stderr = ssh.exec_command('/root/malware')
+        ssh.connect(hostname='127.0.0.1', port=7300, username='user', password='')
+        stdin, stdout, stderr = ssh.exec_command('/home/malware')
         # print(stdout.read().decode())
         ssh.close()
         global under_attack
@@ -149,7 +150,7 @@ def atkEnd():
     try:
         ssh = paramiko.SSHClient()
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh.connect(hostname='127.0.0.1', port=7300, username='root', password='')
+        ssh.connect(hostname='127.0.0.1', port=7300, username='user', password='')
         stdin, stdout, stderr = ssh.exec_command('kill $(ps aux | grep malware | grep -v grep | awk "{print $1}")')
         # print(stdout.read().decode())
         ssh.close()
@@ -175,3 +176,25 @@ def attackHandler(request):
     if request.method == 'GET':
         return JsonResponse({'result': 200, 'msg': under_attack})
 
+@csrf_exempt
+def FakeSSH(request):
+    print('call fakessh')
+    if request.method == 'POST':
+        req = json.loads(request.body)
+        cmd_str = req['command']
+        print(cmd_str)
+        try:
+            ssh = paramiko.SSHClient()
+            ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+            ssh.connect(hostname='47.96.133.35', port=9300, username='user', password='')
+            cmd_str = 'sh --login -c "'+cmd_str+'"'
+            print(cmd_str)
+            stdin, stdout, stderr = ssh.exec_command(cmd_str)
+            out = stdout.read().decode()
+            err = stderr.read().decode()
+            print()
+            # print(stdout.read().decode())
+            ssh.close()
+        except Exception as e:
+            print(e)
+        return JsonResponse({'result': 200, 'stdout': out ,'stderr': err})
