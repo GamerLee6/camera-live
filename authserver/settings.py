@@ -124,6 +124,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
     ('css',os.path.join(STATIC_ROOT, 'css')),
     ('js',os.path.join(STATIC_ROOT, 'js')),
+    ('fonts',os.path.join(STATIC_ROOT, 'fonts')),
 ]
 
 # Default primary key field type
