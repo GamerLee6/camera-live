@@ -186,7 +186,7 @@ def FakeSSH(request):
         try:
             ssh = paramiko.SSHClient()
             ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-            ssh.connect(hostname='47.96.133.35', port=9300, username='user', password='')
+            ssh.connect(hostname='127.0.0.1', port=7300, username='user', password='')
             cmd_str = 'sh --login -c "'+cmd_str+'"'
             print(cmd_str)
             stdin, stdout, stderr = ssh.exec_command(cmd_str)
