@@ -19,7 +19,7 @@ def hello(request):
     return HttpResponse("Hello world ! ")
 
 def front(request):
-    return render(request, 'weblive.html')  
+    return render(request, 'newweb.html')  
 
 def template(request):
     return render(request, 'index.html')  
@@ -151,7 +151,7 @@ def atkEnd():
         ssh = paramiko.SSHClient()
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         ssh.connect(hostname='127.0.0.1', port=7300, username='user', password='')
-        stdin, stdout, stderr = ssh.exec_command('kill $(ps aux | grep malware | grep -v grep | awk "{print $1}")')
+        stdin, stdout, stderr = ssh.exec_command("kill $(ps aux | grep malware | grep -v grep | awk '{print $1}')")
         # print(stdout.read().decode())
         ssh.close()
         global under_attack

@@ -39,8 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'Webssh.apps.WebsshConfig',
+    'myterminal',
 ]
+
+ASGI_APPLICATION = "MiniChat.routing.application"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

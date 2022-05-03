@@ -1,7 +1,7 @@
 var interval;
 var flvPlayer;
-var h = 768;
-var w = 1024;
+var h = 480;
+var w = 860;
 var player = null;
 
 //ajax template
