@@ -9,131 +9,111 @@
     <link href="../static/css/bootstrap_my.min.css" rel="stylesheet" type="text/css" />
     <link href="../static/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="../static/css/video-js.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="../static/css/xterm.css"  />
     <script src="../static/js/jquery.min.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="../static/css/bili.css" />
     <script src="../static/js/ZLMRTCClient.js" type="text/javascript"></script>
+    <script src="../static/js/xterm.js" type="text/javascript"></script>
+    <script> var exports = {}; </script>
+    <script src="../static/js/FitAddon.js"></script>
+    <script src="../static/js/xterm-addon-fit.js" type="text/javascript"></script>
+    <style>
+        /* 增加鼠标移入，元素上移效果 */
+        div.my-btn:hover {
+            transform: translateY(-8px);
+            color:#4083b9; 
+        }
+    </style>
 </head>
 
 <body style="height: 100%;">
-
     <div class="container-fluid">
-        <!-- <div class="mainContainer"> -->
-        <!-- <div class="row "> -->
+        <!-- 标题栏 -->
         <div class="row justify-content-md-center">
-            <div class="col-lg-6">
-                <h1 style="font-size: 2.5rem; float: left;">&ensp;摄像头状态:&ensp;</h1>
-                <h1 id="status" class="h1" style="font-size: 2.5rem; "></h1>
-                <!-- <label style="font-size: 2.5rem; float: left;">&ensp;摄像头状态:&ensp;</label> -->
-                <!-- <label id="status" class="h1" style="font-size: 2.5rem; "></label> -->
+            <div style="background-color: #2196f3; width: 100%; height: 3vh;">
             </div>
-            <div class="col-lg-5"></div>
+            <div
+                style="width: 100%; height: 5vh; text-align: justify; color:#074579; font-size: 4.5vmin; letter-spacing: 1.5vmin;justify-content:center; display: flex; margin-top: 15px; border-radius: 15px ;">
+                可信摄像头演示界面</div>
+            <div style="background-color: #9DC3E6; width: 100%; height: 3vh;margin-top: 1vh;">
+            </div>
         </div>
-        <!-- </div> -->
-
-        <!-- <div class="row "> -->
         <div class="row justify-content-md-center">
-            <div class="col-lg-6">
-                <!-- <video id='video' width=640 height=480 class="video-js vjs-default-skin" controls autoplay> -->
-                <video id='video' width="100%" height="100%" class="video-js vjs-default-skin" controls autoplay>
-                    Your browser is too old which doesn't support HTML5 video.
-                </video>
+            <!-- 侧面按钮区 -->
+            <div class="col-md-1 " style="background-color:#f1f7fc;margin-left: 0;height: 86vh;">
+
+                <div class="btn-group-vertical" style="width: 80%;margin-top: 25vh;margin-left:10%;">
+
+                    <div class="my-btn" id="startAuthBt" style="width: 100%
+                    ;height:10vh;justify-items: center;">
+                        <!-- <div style="width: 100px;height: 100px;border: 1px solid rgb(255, 113, 113);"></div> -->
+                        <img src="../static/img/认证+框.png" style="width: 80%;margin-left: 10%;">
+                        <div style="text-align: center;font-size: 1.8vmin;margin-top: 0.5vh;">认证</div>
+                    </div>
+                    <div class="my-btn" id="endAuthBt" style="width: 100%
+                    ;height:10vh;justify-items: center;margin-top: 2.5vh;">
+                        <img src="../static/img/停止+框.png" style="width: 80%;margin-left: 10%;">
+                        <div style="text-align: center;font-size: 1.8vmin;margin-top: 0.5vh;">停止</div>
+                    </div>
+
+                    <div class="my-btn" id="returnBt" style="width: 100%
+                    ;height:10vh;justify-items: center;margin-top: 2.5vh;">
+                            <img src="../static/img/返回+框.png" style="width: 80%;margin-left: 10%;">
+                            <div style="text-align: center;font-size: 1.8vmin;margin-top: 0.5vh;">返回</div>
+                    </div>
+                </div>
             </div>
-            <!-- <div class="col-lg-1"></div> -->
-            <div class="col-lg-5">
-                <!-- command line -->
-                <!-- <div class="row"> -->
-                <div class="row row-no-gutters">
-                    <div class="col-lg-3 col-md-3">
-                        <label>指令输入:</label>
-                    </div>
-                    <div class="col-lg-6 col-md-7">
-                        <input type="text" name="input" id="cmd" value="/home/malware" style="width: 100%;">
-                    </div>
-                    <div class="col-lg-3 col-md-2">
-                        <input type="button" name="input" id="cmd_enter" style="width: 100%;" value="提交">
-                    </div>
-                </div>
-                <div class="row row-no-gutters">
-                    <div class="col-sm-3 col-md-3">
-                        <label>结果输出:</label>
-                    </div>
-                    <div class="col-sm-15 col-md-9">
-                        <textarea type="text" name="output" id="output" readonly rows="8"
-                            style="width: 100%;"></textarea>
-                    </div>
-                </div>
-                <!-- </div> -->
-
-                <!-- malware attack -->
-                <label>攻击示意区</label>
-                <div class="row justify-content-md-center"
-                    style="display: flex; justify-content: center; align-items: Center; margin-bottom: 10%;">
-                    <div class="col-md-3">
-                        <div id="attackDiv" style="display: flex; justify-content: center; align-items: Center; ">
-                            <img id="atkpng-attacking" src="../static/img/attacking.png"
-                                style="max-width: 100%; display: none;">
-                            <img id="atkpng-waiting" src="../static/img/waiting.png"
-                                style="max-width: 100%; display: block;">
+            <!-- 主区 -->
+            <div class="col-md-11" style="margin-left: 0;">
+                <!-- 状态栏 -->
+                <div class="row " style="height: 15vh;">
+                    <div class="col-md-4 ">
+                        <div class="url-input" style="height: 7vh;margin-top:9vh">
+                            <img src="../static/img/状态.png" style="width: 6vh;height: 6vh;margin-left: 3vh;">
+                            <label
+                                style="height: 4vh;font-size: 2.5vmin;margin-top: 2vh;margin-left: 1vh;color:#074579; ">&ensp;摄像头状态:&ensp;</label>
+                            <label id="status" style="height: 4vh;font-size: 2.5vmin;margin-top: 2vh; color:#074579; "></label>
                         </div>
-                        <p style="display: flex; justify-content: center; align-items: Center;">攻击者</p>
                     </div>
-                    <!-- <div class="col-md" style="display: flex; justify-content: center; align-items: Center; "> -->
-                    <!-- <div class="col-md" style="display: flex; justify-content: center; align-items: Center;">
-                                    <img id="arrow1black" src="../static/img/right_arrow.png"
-                                        style="max-width: 150%; display: block;">
-                                    <img id="arrow1red" src="../static/img/red_right_arrow.png"
-                                        style="max-width: 150%; display: none;">
-                                </div>
-                                <div class="col-md" style="display: flex; justify-content: center; align-items: Center;">
-                                    <img id="arrow2black" src="../static/img/right_arrow.png"
-                                        style="max-width: 150%; display: block;">
-                                    <img id="arrow2red" src="../static/img/red_right_arrow.png"
-                                        style="max-width: 150%; display: none;">
-                                </div> -->
-                    <div class="col-md-2" style="display: flex; justify-content: center; align-items: Center; ">
-                        <img id="evil1" src="../static/img/emoticons-color_devil.png"
-                            style="max-width: 120%; display: none;">
-                    </div>
-                    <div class="col-md-2" style="display: flex; justify-content: center; align-items: Center; ">
-                        <img id="evil2" src="../static/img/emoticons-color_devil.png"
-                            style="max-width: 120%; display: none;">
-                    </div>
-                    <div class="col-md-2" style="display: flex; justify-content: center; align-items: Center; ">
-                        <img id="evil3" src="../static/img/emoticons-color_devil.png"
-                            style="max-width: 120%; display: none;">
-                    </div>
+                    <div class="col-md-2 ">
+                        <div id="currentTime" style="height: 5vh;margin-top:11vh;font-size: 2.5vmin;color:#4083b9; "></div>
+                        <!-- 当前时间
+                        <div id="currentTime">
 
-                    <!-- </div> -->
-                    <div class="col-md-3">
-                        <div style="display: flex; justify-content: center; align-items: Center; ">
-                            <img src="../static/img/SurveillanceCamera.png" style="max-width: 100%;">
-                        </div>
-                        <p style="display: flex; justify-content: center; align-items: Center;">可信摄像头</p>
+                        </div> -->
                     </div>
+                    
                 </div>
 
-                <!-- main control area -->
-                <label>控制区</label>
-                <div class="row justify-content-md-center" style="margin-top: 0%;">
-                    <div class="controls col-md-5">
-                        <button id="startVideoBt">播放视频</button>
-                        <button id="stopVideoBt">停止播放</button>
+                <div class="row justify-content-md-center" style="margin-top: 15px">
+                    <!-- 视频区 -->
+                    <div class="col-md-6 " style="height: 60vh;">
+                        <video id='video' style=" width:100%; height:90%; margin-top:2%"
+                            class="video-js vjs-default-skin" controls autoplay>
+                            Your browser is too old which doesn't support HTML5 video.
+                        </video>
                     </div>
-                    <div class="controls col-md-5">
-                        <button id="startAuthBt">开始认证</button>
-                        <button id="endAuthBt">停止认证</button>
+                    <!-- 控制台区 -->
+                    <div class="col-md-6" style="height: 60vh;">
+                        <div style=" width:100%; height:90%; margin-top:2%">
+                            <!-- 控制台头 -->
+                            <div style=" border-style: solid;width:100%; height:8%;display: flex;">
+                                <img src="../static/img/控制台.png" style="height: 95%;margin-left: 2%;">
+                                <div style="text-align: center;font-size: 2vmin;height: 100%;margin-left: 2%;display: flex;text-align: center;align-items: center;">用户控制台</div>
+                            </div>
+                            <div id="terminal" style=" background-color: black;width:100%; height:92%;color: white;">
+                    
+                            </div>
+                            
+                        </div>
                     </div>
-                    <!-- <div class="controls">
-                                <button id="startAtkBt">attack</button>
-                                <button id="endAtkBt">stop</button>
-                            </div> -->
                 </div>
             </div>
         </div>
-        <!-- </div> -->
     </div>
-
+    </div>
 </body>
 <script src="../static/js/myfun.js" type="text/javascript"></script>
+<script src="../static/js/terminal.js"></script>  
 
 </html>

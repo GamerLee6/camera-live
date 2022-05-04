@@ -19,7 +19,7 @@ def hello(request):
     return HttpResponse("Hello world ! ")
 
 def front(request):
-    return render(request, 'newweb.html')  
+    return render(request, 'weblive.html')  
 
 def template(request):
     return render(request, 'index.html')  

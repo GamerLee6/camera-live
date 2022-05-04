@@ -67,20 +67,20 @@ function start_play() {
         console.log('当前状态==>', state)
     });
 }
+// 取消开始和停止播放 HQ
+// let startVideoBt = document.getElementById('startVideoBt');
+// startVideoBt.onclick = function start() {
+//     stop();
+//     start_play()
+// }
 
-let startVideoBt = document.getElementById('startVideoBt');
-startVideoBt.onclick = function start() {
-    stop();
-    start_play()
-}
-
-let stopVideoBt = document.getElementById('stopVideoBt');
-stopVideoBt.onclick = function stop() {
-    if (player) {
-        player.close();
-        player = null;
-    }
-}
+// let stopVideoBt = document.getElementById('stopVideoBt');
+// stopVideoBt.onclick = function stop() {
+//     if (player) {
+//         player.close();
+//         player = null;
+//     }
+// }
 
 let staForm = document.getElementById('status');
 function timelyAuth() {
@@ -216,217 +216,242 @@ endAuthBt.onclick = function () {
 
 // };
 
+
+//删除动画区 HQ 
 //load png dynamicly
 
-let atkPngAttacking = document.getElementById('atkpng-attacking');
-let atkPngWaiting = document.getElementById('atkpng-waiting');
-var attack_Status = 0;
-var light_switch = 0; //0,1,2,3clear
-var light_interval;
-let attackDiv = document.getElementById('attackDiv');
+// let atkPngAttacking = document.getElementById('atkpng-attacking');
+// let atkPngWaiting = document.getElementById('atkpng-waiting');
+// var attack_Status = 0;
+// var light_switch = 0; //0,1,2,3clear
+// var light_interval;
+// let attackDiv = document.getElementById('attackDiv');
 
 
-let evil1 = document.getElementById('evil1');
-let evil2 = document.getElementById('evil2');
-let evil3 = document.getElementById('evil3');
+// let evil1 = document.getElementById('evil1');
+// let evil2 = document.getElementById('evil2');
+// let evil3 = document.getElementById('evil3');
 
-let arr1b = document.getElementById('arrow1black');
-let arr1r = document.getElementById('arrow1red');
-let arr2b = document.getElementById('arrow2black');
-let arr2r = document.getElementById('arrow2red');
+// let arr1b = document.getElementById('arrow1black');
+// let arr1r = document.getElementById('arrow1red');
+// let arr2b = document.getElementById('arrow2black');
+// let arr2r = document.getElementById('arrow2red');
 
-function startLoopLight() {
-    light_interval = setInterval(loopLight, 1000);
+// function startLoopLight() {
+//     light_interval = setInterval(loopLight, 1000);
+// }
+
+// function endLoopLight() {
+//     clearInterval(light_interval);
+//     light_switch = 0;
+//     evil1.style.display = 'none';
+//     evil2.style.display = 'none';
+//     evil3.style.display = 'none';
+// }
+
+// function loopLight_old() {
+//     if (attack_Status == 0) {
+//         arr1b.style.display = 'block';
+//         arr2b.style.display = 'block';
+//         arr1r.style.display = 'none';
+//         arr2r.style.display = 'none';
+//     } else {
+//         if (light_switch == 0) {
+//             light_switch = 1;
+//             arr1b.style.display = 'none';
+//             arr2b.style.display = 'block';
+//             arr1r.style.display = 'block';
+//             arr2r.style.display = 'none';
+//         } else {
+//             light_switch = 0;
+//             arr1b.style.display = 'block';
+//             arr2b.style.display = 'none';
+//             arr1r.style.display = 'none';
+//             arr2r.style.display = 'block';
+//         }
+//     }
+// }
+
+// function loopLight() {
+
+//     if (light_switch == 0) {
+//         light_switch = 1;
+//         evil1.style.display = 'block';
+//         evil2.style.display = 'none';
+//         evil3.style.display = 'none';
+//     } else if (light_switch == 1) {
+//         light_switch = 2;
+//         evil1.style.display = 'none';
+//         evil2.style.display = 'block';
+//         evil3.style.display = 'none';
+//     } else if (light_switch == 2) {
+//         light_switch = 3;
+//         evil1.style.display = 'none';
+//         evil2.style.display = 'none';
+//         evil3.style.display = 'block';
+//     } else {
+//         light_switch = 0;
+//         evil1.style.display = 'none';
+//         evil2.style.display = 'none';
+//         evil3.style.display = 'none';
+//     }
+
+// }
+
+// window.onload = function () {
+//     let xhrRegister = new XMLHttpRequest();
+//     ajaxResponse(xhrRegister,
+//         function () {
+//             let response = JSON.parse(xhrRegister.responseText);
+//             console.log(response.msg);
+//             if (response.result === 200) {
+//                 attack_Status = response.msg;
+//             } else {
+//                 console.log('unknow');
+//                 attack_Status = 0;
+//             }
+//         }, function () {
+//             console.log('unknow');
+//         });
+
+//     let para = {
+//         req: 'attack_status'
+//     }
+//     xhrRegister.open('GET', '../attack/');
+//     xhrRegister.setRequestHeader('Content-type', 'application/x-www-form-urlencoded;charset=utf-8');
+//     xhrRegister.send(JSON.stringify(para));
+
+//     if (attack_Status == 0) {
+//         atkPngAttacking.style.display = "none";
+//         atkPngWaiting.style.display = "block";
+//     }
+//     else {
+//         atkPngAttacking.style.display = "block";
+//         atkPngWaiting.style.display = "none";
+//     }
+// }
+
+// //attack png click function
+// attackDiv.onclick = function () {
+
+//     let para = {
+//         status: attack_Status,
+//     }
+
+//     console.log(attack_Status);
+//     if (attack_Status == 0) {
+//         para['status'] = 'start';
+//     } else {
+//         para['status'] = 'end';
+//     }
+//     console.log(para);
+
+//     let xhrRegister = new XMLHttpRequest();
+//     ajaxResponse(xhrRegister,
+//         function () {
+//             let response = JSON.parse(xhrRegister.responseText);
+//             console.log(response.msg);
+//             if (response.msg === 'start attack succeed') {
+//                 console.log('attack start succeed');
+//                 attack_Status = 1;
+//                 startLoopLight();
+//                 atkPngAttacking.style.display = "block";
+//                 atkPngWaiting.style.display = "none";
+//             } else if (response.msg === 'end attack succeed') {
+//                 console.log('attack end succeed');
+//                 attack_Status = 0;
+//                 endLoopLight();
+//                 atkPngAttacking.style.display = "none";
+//                 atkPngWaiting.style.display = "block";
+//             } else {
+//                 console.log('unknow status');
+//             }
+//         }, function () {
+//             console.log('unknow');
+//         });
+
+
+//     xhrRegister.open('POST', '../attack/');
+//     xhrRegister.setRequestHeader('Content-type', 'application/x-www-form-urlencoded;charset=utf-8');
+//     xhrRegister.send(JSON.stringify(para));
+// }
+
+
+// let commitBtn = document.getElementById('cmd_enter');
+// let cmdInput = document.getElementById('cmd');
+// let outputText = document.getElementById('output');
+
+// cmdInput.onfocus = function () {
+//     this.select();
+// }
+
+
+
+// cmdInput.onkeydown = function (eve) {
+//     console.log("pressed enter");
+//     var e = eve || window.event;
+//     if (e.keyCode == 13) {
+//         commitBtn.onclick();
+//     }
+// }
+
+
+
+// commitBtn.onclick = function () {
+//     cmt_str = cmdInput.value;
+//     console.log(cmt_str);
+
+//     let xhrRegister = new XMLHttpRequest();
+//     ajaxResponse(xhrRegister,
+//         function () {
+//             let response = JSON.parse(xhrRegister.responseText);
+//             let out = response.stdout;
+//             let err = response.stderr
+//             console.log(out);
+//             console.log(err);
+//             outputText.innerHTML = '';
+//             if (response.result === 200) {
+//                 if (out.length != 0)
+//                     outputText.innerHTML = outputText.innerHTML + out;
+//                 if (err.length != 0)
+//                     outputText.innerHTML = outputText.innerHTML + '\n' + err;
+//             } else {
+//                 outputText.innerText = "";
+//             }
+//         }, function () {
+//             console.log('unknow');
+//             outputText.innerText = "";
+//         });
+
+
+//     let para = {
+//         command: cmt_str,
+//     }
+
+//     xhrRegister.open('POST', '../sshcommand/');
+//     xhrRegister.setRequestHeader('Content-type', 'application/x-www-form-urlencoded;charset=utf-8');
+//     xhrRegister.send(JSON.stringify(para));
+// }
+
+
+let returnBt = document.getElementById('returnBt');
+returnBt.onclick = function () {
+    // window.close();
+    location.replace("http://47.96.133.35"); 
+};
+
+//获取当前时间
+let currentTime = document.getElementById('currentTime');
+function getcurrentFormatTime() {
+	var date = new Date();
+	var seperator1 = "-";
+	var seperator2 = ":";
+	var month = date.getMonth() + 1<10? "0"+(date.getMonth() + 1):date.getMonth() + 1;
+	var strDate = date.getDate()<10? "0" + date.getDate():date.getDate();
+	var dataTime = date.getFullYear() + seperator1  + month  + seperator1  + strDate
+			+ " "  + date.getHours()  + seperator2  + date.getMinutes()
+			+ seperator2 + date.getSeconds();
+    currentTime.innerHTML=dataTime;
 }
-
-function endLoopLight() {
-    clearInterval(light_interval);
-    light_switch = 0;
-    evil1.style.display = 'none';
-    evil2.style.display = 'none';
-    evil3.style.display = 'none';
-}
-
-function loopLight_old() {
-    if (attack_Status == 0) {
-        arr1b.style.display = 'block';
-        arr2b.style.display = 'block';
-        arr1r.style.display = 'none';
-        arr2r.style.display = 'none';
-    } else {
-        if (light_switch == 0) {
-            light_switch = 1;
-            arr1b.style.display = 'none';
-            arr2b.style.display = 'block';
-            arr1r.style.display = 'block';
-            arr2r.style.display = 'none';
-        } else {
-            light_switch = 0;
-            arr1b.style.display = 'block';
-            arr2b.style.display = 'none';
-            arr1r.style.display = 'none';
-            arr2r.style.display = 'block';
-        }
-    }
-}
-
-function loopLight() {
-
-    if (light_switch == 0) {
-        light_switch = 1;
-        evil1.style.display = 'block';
-        evil2.style.display = 'none';
-        evil3.style.display = 'none';
-    } else if (light_switch == 1) {
-        light_switch = 2;
-        evil1.style.display = 'none';
-        evil2.style.display = 'block';
-        evil3.style.display = 'none';
-    } else if (light_switch == 2) {
-        light_switch = 3;
-        evil1.style.display = 'none';
-        evil2.style.display = 'none';
-        evil3.style.display = 'block';
-    } else {
-        light_switch = 0;
-        evil1.style.display = 'none';
-        evil2.style.display = 'none';
-        evil3.style.display = 'none';
-    }
-
-}
-
-window.onload = function () {
-    let xhrRegister = new XMLHttpRequest();
-    ajaxResponse(xhrRegister,
-        function () {
-            let response = JSON.parse(xhrRegister.responseText);
-            console.log(response.msg);
-            if (response.result === 200) {
-                attack_Status = response.msg;
-            } else {
-                console.log('unknow');
-                attack_Status = 0;
-            }
-        }, function () {
-            console.log('unknow');
-        });
-
-    let para = {
-        req: 'attack_status'
-    }
-    xhrRegister.open('GET', '../attack/');
-    xhrRegister.setRequestHeader('Content-type', 'application/x-www-form-urlencoded;charset=utf-8');
-    xhrRegister.send(JSON.stringify(para));
-
-    if (attack_Status == 0) {
-        atkPngAttacking.style.display = "none";
-        atkPngWaiting.style.display = "block";
-    }
-    else {
-        atkPngAttacking.style.display = "block";
-        atkPngWaiting.style.display = "none";
-    }
-}
-
-//attack png click function
-attackDiv.onclick = function () {
-
-    let para = {
-        status: attack_Status,
-    }
-
-    console.log(attack_Status);
-    if (attack_Status == 0) {
-        para['status'] = 'start';
-    } else {
-        para['status'] = 'end';
-    }
-    console.log(para);
-
-    let xhrRegister = new XMLHttpRequest();
-    ajaxResponse(xhrRegister,
-        function () {
-            let response = JSON.parse(xhrRegister.responseText);
-            console.log(response.msg);
-            if (response.msg === 'start attack succeed') {
-                console.log('attack start succeed');
-                attack_Status = 1;
-                startLoopLight();
-                atkPngAttacking.style.display = "block";
-                atkPngWaiting.style.display = "none";
-            } else if (response.msg === 'end attack succeed') {
-                console.log('attack end succeed');
-                attack_Status = 0;
-                endLoopLight();
-                atkPngAttacking.style.display = "none";
-                atkPngWaiting.style.display = "block";
-            } else {
-                console.log('unknow status');
-            }
-        }, function () {
-            console.log('unknow');
-        });
-
-
-    xhrRegister.open('POST', '../attack/');
-    xhrRegister.setRequestHeader('Content-type', 'application/x-www-form-urlencoded;charset=utf-8');
-    xhrRegister.send(JSON.stringify(para));
-}
-
-
-let commitBtn = document.getElementById('cmd_enter');
-let cmdInput = document.getElementById('cmd');
-let outputText = document.getElementById('output');
-
-cmdInput.onfocus = function () {
-    this.select();
-}
-
-
-
-cmdInput.onkeydown = function (eve) {
-    console.log("pressed enter");
-    var e = eve || window.event;
-    if (e.keyCode == 13) {
-        commitBtn.onclick();
-    }
-}
-
-
-
-commitBtn.onclick = function () {
-    cmt_str = cmdInput.value;
-    console.log(cmt_str);
-
-    let xhrRegister = new XMLHttpRequest();
-    ajaxResponse(xhrRegister,
-        function () {
-            let response = JSON.parse(xhrRegister.responseText);
-            let out = response.stdout;
-            let err = response.stderr
-            console.log(out);
-            console.log(err);
-            outputText.innerHTML = '';
-            if (response.result === 200) {
-                if (out.length != 0)
-                    outputText.innerHTML = outputText.innerHTML + out;
-                if (err.length != 0)
-                    outputText.innerHTML = outputText.innerHTML + '\n' + err;
-            } else {
-                outputText.innerText = "";
-            }
-        }, function () {
-            console.log('unknow');
-            outputText.innerText = "";
-        });
-
-
-    let para = {
-        command: cmt_str,
-    }
-
-    xhrRegister.open('POST', '../sshcommand/');
-    xhrRegister.setRequestHeader('Content-type', 'application/x-www-form-urlencoded;charset=utf-8');
-    xhrRegister.send(JSON.stringify(para));
-}
+getcurrentFormatTime();
+setInterval(getcurrentFormatTime, 1000);

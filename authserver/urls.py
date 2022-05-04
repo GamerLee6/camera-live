@@ -22,6 +22,9 @@ from django.views import static
 from django.conf import settings
 # from django.conf.urls import url
 
+from myterminal.views import *
+from myterminal.consumers import *
+
 urlpatterns = [
  
     path('', front, name='home'),
@@ -33,4 +36,5 @@ urlpatterns = [
     re_path(r'weblive[0-9]+-[0-9]+', front, name='video'),
     re_path(r'^static/(?P<path>.*)$', static.serve,
       {'document_root': settings.STATIC_ROOT}, name='static'),
+    path('ssh/', webssh, name="chat-url"),
 ]

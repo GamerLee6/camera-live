@@ -40,9 +40,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'myterminal',
+    'channels',
+
 ]
 
-ASGI_APPLICATION = "MiniChat.routing.application"
+
+ASGI_APPLICATION = 'authserver.asgi.application'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
