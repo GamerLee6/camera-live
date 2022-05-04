@@ -128,6 +128,10 @@ def getauthresult(request):
             stop_check()
             return JsonResponse({'result': 200, 'msg': 'OK'})
 
+"""
+the following funcion are discarded because add the web terminal
+"""
+ 
 under_attack = 0
 
 def atkStart():

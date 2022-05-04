@@ -90,7 +90,7 @@ class SSHConsumer(WebsocketConsumer):
         # ssh_connect_args = {'host':'10.4.122.33', 'username': 'user', 'port':22}
 
         self.ssh = SSHBridge(websocket=self)
-        self.ssh.connect(host='10.4.122.33', port=22, username='user')
+        self.ssh.connect(host='127.0.0.1', port=7300, username='user')
 
     def disconnect(self, code):
         # print('start close ws connection')
