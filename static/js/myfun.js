@@ -119,7 +119,7 @@ let subStartBt = document.getElementById('startAuthBt');
 subStartBt.onclick = function () {
     console.log("start checking");
     timelyAuth();
-    interval = setInterval(timelyAuth, 15000);
+    interval = setInterval(timelyAuth, 8000);
 };
 
 let endAuthBt = document.getElementById('endAuthBt');
