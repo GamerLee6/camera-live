@@ -54,7 +54,7 @@ def routine_check(ssl_sock):
         camera_status = int(ssl_sock.recv(1024).decode())
         # print(camera_status)
         sock.close()
-        time.sleep(10)
+        time.sleep(7)
 
 
 
