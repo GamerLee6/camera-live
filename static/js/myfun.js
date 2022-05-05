@@ -67,20 +67,20 @@ function start_play() {
         console.log('当前状态==>', state)
     });
 }
-// 取消开始和停止播放 HQ
-// let startVideoBt = document.getElementById('startVideoBt');
-// startVideoBt.onclick = function start() {
-//     stop();
-//     start_play()
-// }
 
-// let stopVideoBt = document.getElementById('stopVideoBt');
-// stopVideoBt.onclick = function stop() {
-//     if (player) {
-//         player.close();
-//         player = null;
-//     }
-// }
+let startVideoBt = document.getElementById('startVideoBt');
+startVideoBt.onclick = function start() {
+    stop();
+    start_play()
+}
+
+let stopVideoBt = document.getElementById('stopVideoBt');
+stopVideoBt.onclick = function stop() {
+    if (player) {
+        player.close();
+        player = null;
+    }
+}
 
 let staForm = document.getElementById('status');
 function timelyAuth() {
