@@ -75,7 +75,7 @@ def check():
     ssl_sock.connect(ip_port)  
     
     global check_thread
-    check_thread = threading.Thread(target=routine_check(ssl_sock,))
+    check_thread = threading.Thread(target=routine_check,args=(ssl_sock,))
     check_thread.start()
 
 
