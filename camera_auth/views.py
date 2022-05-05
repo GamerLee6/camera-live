@@ -26,24 +26,24 @@ def template(request):
 
 
 is_checking = False
-# sock = None
+sock = None
 camera_status = 0
 keep_running = 0
 check_thread = None
 
  
 
-def routine_check():
+def routine_check(ssl_sock):
     global camera_status
     while keep_running:
-        context = ssl.SSLContext(ssl.PROTOCOL_TLS)
-        context.verify_mode = ssl.CERT_NONE
+        # context = ssl.SSLContext(ssl.PROTOCOL_TLS)
+        # context.verify_mode = ssl.CERT_NONE
 
-        ip_port = ('127.0.0.1', 8081)
-        sock = socket.socket()
-        ssl_sock = context.wrap_socket(sock, server_hostname='127.0.0.1')
+        # ip_port = ('127.0.0.1', 8081)
+        # sock = socket.socket()
+        # ssl_sock = context.wrap_socket(sock, server_hostname='127.0.0.1')
 
-        ssl_sock.connect(ip_port)  
+        # ssl_sock.connect(ip_port)  
         
         server_reply = ssl_sock.recv(1024).decode()
         # print(server_reply)
@@ -54,9 +54,6 @@ def routine_check():
         camera_status = int(ssl_sock.recv(1024).decode())
         # print(camera_status)
         sock.close()
-        # global keep_running
-        # if keep_running == 0:
-        #     break
         time.sleep(10)
 
 
@@ -64,21 +61,21 @@ def routine_check():
 def check():
     global keep_running
     keep_running = 1
-    # global sock
+    global sock
     global is_checking
     is_checking = True
 
-    # context = ssl.SSLContext(ssl.PROTOCOL_TLS)
-    # context.verify_mode = ssl.CERT_NONE
+    context = ssl.SSLContext(ssl.PROTOCOL_TLS)
+    context.verify_mode = ssl.CERT_NONE
 
-    # ip_port = ('127.0.0.1', 8081)
-    # sock = socket.socket()
-    # ssl_sock = context.wrap_socket(sock, server_hostname='127.0.0.1')
+    ip_port = ('127.0.0.1', 8081)
+    sock = socket.socket()
+    ssl_sock = context.wrap_socket(sock, server_hostname='127.0.0.1')
 
-    # ssl_sock.connect(ip_port)  
+    ssl_sock.connect(ip_port)  
     
     global check_thread
-    check_thread = threading.Thread(target=routine_check)
+    check_thread = threading.Thread(target=routine_check(ssl_sock,))
     check_thread.start()
 
 
@@ -92,8 +89,8 @@ def stop_check():
     keep_running = 0
     global check_thread
     check_thread.join()
-    # global sock
-    # sock.close()
+    global sock
+    sock.close()
     
     is_checking = False
     return
@@ -128,10 +125,10 @@ def getauthresult(request):
             stop_check()
             return JsonResponse({'result': 200, 'msg': 'OK'})
 
+
 """
 the following funcion are discarded because add the web terminal
 """
- 
 under_attack = 0
 
 def atkStart():

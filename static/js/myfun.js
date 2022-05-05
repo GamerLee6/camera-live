@@ -448,9 +448,12 @@ function getcurrentFormatTime() {
 	var seperator2 = ":";
 	var month = date.getMonth() + 1<10? "0"+(date.getMonth() + 1):date.getMonth() + 1;
 	var strDate = date.getDate()<10? "0" + date.getDate():date.getDate();
+    var hour = date.getHours()<10? "0"+date.getHours():date.getHours();
+	var min = date.getMinutes()<10? "0"+date.getMinutes():date.getMinutes();
+    var sec = date.getSeconds()<10? "0"+date.getSeconds():date.getSeconds();
 	var dataTime = date.getFullYear() + seperator1  + month  + seperator1  + strDate
-			+ " "  + date.getHours()  + seperator2  + date.getMinutes()
-			+ seperator2 + date.getSeconds();
+			+ " "  + hour  + seperator2  + min
+			+ seperator2 + sec;
     currentTime.innerHTML=dataTime;
 }
 getcurrentFormatTime();
