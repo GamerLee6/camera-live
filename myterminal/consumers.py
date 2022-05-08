@@ -45,7 +45,7 @@ class SSHBridge(object):
             self.ssh_channel = None
             self.websocket.close()    
         except BaseException as e:
-            print('close ws err:'+ e)
+            print('close ws err:'+ str(e))
         # print('close ws connection')
 
     def _ws_to_ssh(self, data):

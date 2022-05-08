@@ -1,4 +1,4 @@
-var interval;
+var interval = null;
 var flvPlayer;
 var h = 480;
 var w = 860;
@@ -67,15 +67,28 @@ function start_play() {
         console.log('当前状态==>', state)
     });
 }
+let startVideoIcon = document.getElementById('startVideoIcon');
+let startVideoText = document.getElementById('startVideoText');
+let stopVideoIcon = document.getElementById('stopVideoIcon');
+let stopVideoText = document.getElementById('stopVideoText');
+let startAuthIcon = document.getElementById('startAuthIcon');
+let startAuthText = document.getElementById('startAuthText');
+let endAuthIcon = document.getElementById('endAuthIcon');
+let endAuthText = document.getElementById('endAuthText');
 
-let startVideoBt = document.getElementById('startVideoBt');
 startVideoBt.onclick = function start() {
+    startVideoIcon.src="../static/img/监控-点后.png";
+    startVideoText.style.color="#4083b9"
     stop();
-    start_play()
+    start_play();
+
 }
 
 let stopVideoBt = document.getElementById('stopVideoBt');
 stopVideoBt.onclick = function stop() {
+    startVideoIcon.src="../static/img/监控.png";
+    startVideoText.style.color="black";
+    // stopVideoIcon.src="../static/img/停止播放-点后.png";
     if (player) {
         player.close();
         player = null;
@@ -117,15 +130,28 @@ function timelyAuth() {
 
 let subStartBt = document.getElementById('startAuthBt');
 subStartBt.onclick = function () {
+    // endAuthIcon.src="../static/img/停止认证.png"
+    startAuthIcon.src="../static/img/认证-点后.png"
+    startAuthText.style.color="#4083b9"
     console.log("start checking");
     timelyAuth();
-    interval = setInterval(timelyAuth, 8000);
+    if (!interval) {
+        // console.log("before timelyauth"+interval);
+        interval = setInterval(timelyAuth, 8000);
+        // console.log("start timelyauth"+interval);
+    }   
 };
 
 let endAuthBt = document.getElementById('endAuthBt');
 endAuthBt.onclick = function () {
+    startAuthIcon.src="../static/img/认证.png"
+    startAuthText.style.color="black"
+    // endAuthIcon.src="../static/img/停止认证-点后.png"
+
     console.log("stop checking");
     clearInterval(interval);
+    interval = null;
+    // console.log("stop timelyauth"+interval);
 
     let xhrRegister = new XMLHttpRequest();
     ajaxResponse(xhrRegister,
